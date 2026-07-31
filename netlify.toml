@@ -1,5 +1,5 @@
 [build]
-  command = "echo 'Build complete'"
+  command = "node scripts/generatePhotoList.js"
   functions = "netlify/functions"
   publish = "."
 
