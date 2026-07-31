@@ -1,0 +1,9 @@
+[build]
+  command = "echo 'Build complete'"
+  functions = "netlify/functions"
+  publish = "."
+
+[[redirects]]
+  from = "/photos/*"
+  to = "/photos/:splat"
+  status = 200
