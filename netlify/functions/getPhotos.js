@@ -1,38 +1,19 @@
-const fs = require('fs');
-const path = require('path');
-
 exports.handler = async (event, context) => {
   try {
-    const photosDir = path.join(__dirname, '../../photos');
+    // On Netlify, deployed files are at the root
+    // We'll try to fetch the photos by checking their URLs
+    // Since we can't read server files directly, list them manually or use a workaround
     
-    // Check if photos folder exists
-    if (!fs.existsSync(photosDir)) {
-      return {
-        statusCode: 200,
-        body: JSON.stringify([])
-      };
-    }
-    
-    const files = fs.readdirSync(photosDir);
-    const photoItems = files
-      .filter(file => {
-        const ext = path.extname(file).toLowerCase();
-        return ['.jpg', '.jpeg', '.png', '.gif', '.mp4', '.mov'].includes(ext);
-      })
-      .map(file => {
-        const ext = path.extname(file).toLowerCase();
-        const isVideo = ['.mp4', '.mov'].includes(ext);
-        return {
-          file: file,
-          type: isVideo ? 'video' : 'image',
-          name: path.basename(file, path.extname(file))
-        };
-      });
-    
+    // For now, return empty - we'll use a different approach
     return {
       statusCode: 200,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(photoItems)
+      body: JSON.stringify([
+        { file: '126.jpg', type: 'image', name: '126' },
+        { file: '176.jpg', type: 'image', name: '176' },
+        { file: 'Profile Pic.jpg', type: 'image', name: 'Profile Pic' },
+        { file: '60382498036_0E58985F-C698-4B17-A3D9-75A7FCF35381.JPG', type: 'image', name: 'Photo' }
+      ])
     };
   } catch (error) {
     return {
