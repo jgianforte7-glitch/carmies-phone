@@ -1,5 +1,3 @@
-
-Kids app v4 · HTML
 <!DOCTYPE html>
 <!--
     CARMIE'S PHONE - v5.0
@@ -56,7 +54,7 @@ Kids app v4 · HTML
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
- 
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             overflow: hidden;
@@ -65,7 +63,7 @@ Kids app v4 · HTML
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             position: relative;
         }
- 
+
         .screen {
             width: 100%;
             height: 100%;
@@ -74,11 +72,11 @@ Kids app v4 · HTML
             left: 0;
             display: none;
         }
- 
+
         .screen.active {
             display: block;
         }
- 
+
         .nav-bar {
             position: fixed;
             bottom: 0;
@@ -93,7 +91,7 @@ Kids app v4 · HTML
             padding: 0 10px;
             z-index: 100;
         }
- 
+
         .nav-btn {
             background: white;
             border: none;
@@ -107,12 +105,12 @@ Kids app v4 · HTML
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
             cursor: pointer;
         }
- 
+
         .nav-btn.active {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
         }
- 
+
         .music-player {
             position: fixed;
             top: 15px;
@@ -127,11 +125,11 @@ Kids app v4 · HTML
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             z-index: 50;
         }
- 
+
         .music-player.visible {
             display: flex;
         }
- 
+
         .music-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
@@ -142,16 +140,16 @@ Kids app v4 · HTML
             color: white;
             cursor: pointer;
         }
- 
+
         .music-btn.playing {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }
- 
+
         .volume-slider {
             width: 80px;
             height: 6px;
         }
- 
+
         .sounds-grid {
             width: 100%;
             height: calc(100% - 100px);
@@ -161,12 +159,12 @@ Kids app v4 · HTML
             gap: 12px;
             padding: 90px 15px 90px;
         }
- 
+
         .sound-card {
             perspective: 1000px;
             cursor: pointer;
         }
- 
+
         .sound-card-inner {
             width: 100%;
             height: 100%;
@@ -174,11 +172,11 @@ Kids app v4 · HTML
             transform-style: preserve-3d;
             transition: transform 0.5s;
         }
- 
+
         .sound-card.flipped .sound-card-inner {
             transform: rotateY(180deg);
         }
- 
+
         .sound-card-face {
             position: absolute;
             width: 100%;
@@ -192,26 +190,26 @@ Kids app v4 · HTML
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
             gap: 6px;
         }
- 
+
         .sound-card-front {
             border: 2px solid rgba(255,255,255,0.2);
         }
- 
+
         .sound-card-back {
             background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
             transform: rotateY(180deg);
         }
- 
+
         .sound-card-emoji {
             font-size: 50px;
         }
- 
+
         .sound-card-label {
             font-size: 18px;
             color: white;
             font-weight: 700;
         }
- 
+
         .music-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -220,7 +218,7 @@ Kids app v4 · HTML
             max-height: calc(100% - 100px);
             overflow-y: auto;
         }
- 
+
         .photos-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -229,7 +227,7 @@ Kids app v4 · HTML
             max-height: calc(100% - 100px);
             overflow-y: auto;
         }
- 
+
         .music-item {
             aspect-ratio: 1;
             border-radius: 10px;
@@ -246,7 +244,7 @@ Kids app v4 · HTML
             border: 2px solid rgba(255,255,255,0.3);
             position: relative;
         }
- 
+
         .music-item::before {
             content: '';
             position: absolute;
@@ -257,11 +255,11 @@ Kids app v4 · HTML
             background: rgba(0, 0, 0, 0.4);
             z-index: 1;
         }
- 
+
         .music-item:active {
             transform: scale(0.95);
         }
- 
+
         .photo-item {
             aspect-ratio: 1;
             border-radius: 10px;
@@ -278,7 +276,7 @@ Kids app v4 · HTML
             border: 2px solid rgba(255,255,255,0.3);
             position: relative;
         }
- 
+
         .photo-item::before {
             content: '';
             position: absolute;
@@ -289,22 +287,26 @@ Kids app v4 · HTML
             background: rgba(0, 0, 0, 0.2);
             z-index: 1;
         }
- 
+
         .photo-item:active {
             transform: scale(0.95);
         }
- 
+
         .photo-item-title {
             color: white;
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 600;
             text-align: center;
-            padding: 10px;
-            position: relative;
+            padding: 4px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
             z-index: 2;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
         }
- 
+
         .music-item-title {
             color: white;
             font-size: 18px;
@@ -315,7 +317,7 @@ Kids app v4 · HTML
             z-index: 2;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
- 
+
         .media-viewer {
             display: none;
             position: fixed;
@@ -328,11 +330,11 @@ Kids app v4 · HTML
             align-items: center;
             justify-content: center;
         }
- 
+
         .media-viewer.active {
             display: flex;
         }
- 
+
         .media-close {
             position: absolute;
             top: 20px;
@@ -347,7 +349,7 @@ Kids app v4 · HTML
             cursor: pointer;
             z-index: 1001;
         }
- 
+
         .music-viewer {
             display: none;
             position: fixed;
@@ -360,11 +362,11 @@ Kids app v4 · HTML
             align-items: center;
             justify-content: center;
         }
- 
+
         .music-viewer.active {
             display: flex;
         }
- 
+
         .music-close {
             position: absolute;
             top: 20px;
@@ -379,7 +381,7 @@ Kids app v4 · HTML
             cursor: pointer;
             z-index: 1001;
         }
- 
+
         .photos-viewer {
             display: none;
             position: fixed;
@@ -393,11 +395,11 @@ Kids app v4 · HTML
             justify-content: center;
             flex-direction: column;
         }
- 
+
         .photos-viewer.active {
             display: flex;
         }
- 
+
         .photos-viewer-content {
             width: 100%;
             height: 100%;
@@ -406,14 +408,14 @@ Kids app v4 · HTML
             justify-content: center;
             position: relative;
         }
- 
+
         .photos-viewer img,
         .photos-viewer video {
             max-width: 95%;
             max-height: 90%;
             object-fit: contain;
         }
- 
+
         .photos-close {
             position: absolute;
             top: 20px;
@@ -428,7 +430,7 @@ Kids app v4 · HTML
             cursor: pointer;
             z-index: 1001;
         }
- 
+
         .photos-counter {
             position: absolute;
             bottom: 20px;
@@ -441,7 +443,7 @@ Kids app v4 · HTML
             border-radius: 20px;
             z-index: 1001;
         }
- 
+
         .cards-container {
             width: 100%;
             height: calc(100% - 100px);
@@ -452,14 +454,14 @@ Kids app v4 · HTML
             padding: 90px 20px 20px;
             gap: 20px;
         }
- 
+
         .flashcard {
             width: 85%;
             height: 400px;
             perspective: 1000px;
             cursor: pointer;
         }
- 
+
         .flashcard-inner {
             width: 100%;
             height: 100%;
@@ -467,11 +469,11 @@ Kids app v4 · HTML
             transform-style: preserve-3d;
             transition: transform 0.6s;
         }
- 
+
         .flashcard.flipped .flashcard-inner {
             transform: rotateY(180deg);
         }
- 
+
         .flashcard-face {
             position: absolute;
             width: 100%;
@@ -484,31 +486,31 @@ Kids app v4 · HTML
             justify-content: center;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
- 
+
         .flashcard-front {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         }
- 
+
         .flashcard-back {
             background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
             transform: rotateY(180deg);
         }
- 
+
         .card-emoji {
             font-size: 150px;
         }
- 
+
         .card-word {
             font-size: 48px;
             color: white;
             font-weight: 700;
         }
- 
+
         .card-nav {
             display: flex;
             gap: 20px;
         }
- 
+
         .card-nav-btn {
             background: white;
             border: none;
@@ -519,7 +521,7 @@ Kids app v4 · HTML
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             cursor: pointer;
         }
- 
+
         .letters-container {
             width: 100%;
             height: calc(100% - 100px);
@@ -528,7 +530,7 @@ Kids app v4 · HTML
             padding: 90px 20px 20px;
             gap: 20px;
         }
- 
+
         .score {
             position: fixed;
             top: 80px;
@@ -541,7 +543,7 @@ Kids app v4 · HTML
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             display: none;
         }
- 
+
         .target-display {
             background: white;
             border-radius: 30px;
@@ -553,20 +555,20 @@ Kids app v4 · HTML
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             cursor: pointer;
         }
- 
+
         .target-letter {
             font-size: 140px;
             font-weight: 700;
             color: #667eea;
         }
- 
+
         .options-grid {
             flex: 1;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
         }
- 
+
         .option-btn {
             border: none;
             border-radius: 30px;
@@ -576,7 +578,7 @@ Kids app v4 · HTML
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
             cursor: pointer;
         }
- 
+
         .phone-container {
             width: 100%;
             height: calc(100% - 120px);
@@ -585,7 +587,7 @@ Kids app v4 · HTML
             justify-content: center;
             padding: 10px 20px 10px;
         }
- 
+
         .phone-screen {
             width: 100%;
             max-width: 400px;
@@ -598,7 +600,7 @@ Kids app v4 · HTML
             flex-direction: column;
             position: relative;
         }
- 
+
         .settings-btn {
             position: absolute;
             top: 12px;
@@ -613,7 +615,7 @@ Kids app v4 · HTML
             z-index: 10;
             cursor: pointer;
         }
- 
+
         .phone-display {
             flex: 0 0 auto;
             min-height: 70px;
@@ -625,25 +627,25 @@ Kids app v4 · HTML
             padding: 10px;
             text-align: center;
         }
- 
+
         .phone-display.calling-mode {
             flex: 1;
             max-height: none;
         }
- 
+
         .phone-number {
             font-size: 20px;
             color: white;
             min-height: 25px;
         }
- 
+
         .phone-keypad {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 5px;
             margin-bottom: 5px;
         }
- 
+
         .phone-key {
             aspect-ratio: 1;
             background: rgba(255, 255, 255, 0.1);
@@ -654,12 +656,12 @@ Kids app v4 · HTML
             font-weight: 300;
             cursor: pointer;
         }
- 
+
         .phone-actions {
             display: flex;
             gap: 5px;
         }
- 
+
         .phone-action {
             flex: 1;
             padding: 10px;
@@ -670,25 +672,25 @@ Kids app v4 · HTML
             color: white;
             cursor: pointer;
         }
- 
+
         .call-btn {
             background: linear-gradient(135deg, #34C759 0%, #30D158 100%);
         }
- 
+
         .facetime-btn {
             background: linear-gradient(135deg, #0A84FF 0%, #409CFF 100%);
         }
- 
+
         .end-btn {
             background: linear-gradient(135deg, #FF3B30 0%, #FF453A 100%);
         }
- 
+
         .delete-btn {
             flex: 0 0 60px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
         }
- 
+
         .pin-screen {
             position: absolute;
             top: 0;
@@ -704,42 +706,42 @@ Kids app v4 · HTML
             padding: 40px;
             border-radius: 40px;
         }
- 
+
         .pin-screen.active {
             display: flex;
         }
- 
+
         .pin-title {
             color: white;
             font-size: 24px;
             margin-bottom: 30px;
         }
- 
+
         .pin-dots {
             display: flex;
             gap: 15px;
             margin-bottom: 40px;
         }
- 
+
         .pin-dot {
             width: 16px;
             height: 16px;
             border-radius: 50%;
             border: 2px solid rgba(255, 255, 255, 0.3);
         }
- 
+
         .pin-dot.filled {
             background: white;
             border-color: white;
         }
- 
+
         .pin-keypad {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             max-width: 300px;
         }
- 
+
         .pin-key {
             width: 70px;
             height: 70px;
@@ -750,13 +752,13 @@ Kids app v4 · HTML
             font-size: 28px;
             cursor: pointer;
         }
- 
+
         .pin-error {
             color: #ff3b30;
             margin-top: 20px;
             min-height: 20px;
         }
- 
+
         .settings-panel {
             position: absolute;
             top: 0;
@@ -770,23 +772,23 @@ Kids app v4 · HTML
             padding: 60px 20px 20px;
             border-radius: 40px;
         }
- 
+
         .settings-panel.active {
             display: flex;
         }
- 
+
         .settings-header {
             display: flex;
             justify-content: space-between;
             margin-bottom: 30px;
         }
- 
+
         .settings-title {
             color: white;
             font-size: 24px;
             font-weight: 600;
         }
- 
+
         .settings-close {
             background: rgba(255, 255, 255, 0.1);
             border: none;
@@ -797,7 +799,7 @@ Kids app v4 · HTML
             font-size: 24px;
             cursor: pointer;
         }
- 
+
         .settings-input {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -808,7 +810,7 @@ Kids app v4 · HTML
             width: 100%;
             margin: 10px 0;
         }
- 
+
         .settings-save {
             background: linear-gradient(135deg, #34C759 0%, #30D158 100%);
             color: white;
@@ -820,37 +822,37 @@ Kids app v4 · HTML
             margin: 10px 0;
             cursor: pointer;
         }
- 
+
         .settings-label {
             color: rgba(255, 255, 255, 0.7);
             font-size: 14px;
             margin: 20px 0 10px;
         }
- 
+
         .gradient-1 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
         .gradient-2 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
         .gradient-3 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
         .gradient-4 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
         .gradient-5 { background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); }
         .gradient-6 { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
- 
+
         .video-display {
             display: none;
             width: 100%;
             height: 100%;
         }
- 
+
         .video-display.active {
             display: block;
         }
- 
+
         .video-display iframe {
             width: 100%;
             height: 100%;
             border: none;
             border-radius: 20px;
         }
- 
+
         .helper-text {
             position: absolute;
             top: 100px;
@@ -862,7 +864,7 @@ Kids app v4 · HTML
             padding: 8px 20px;
             border-radius: 15px;
         }
- 
+
         .calling-state {
             display: none;
             flex-direction: column;
@@ -871,11 +873,11 @@ Kids app v4 · HTML
             flex: 1;
             padding-top: 20px;
         }
- 
+
         .calling-state.active {
             display: flex;
         }
- 
+
         .caller-avatar {
             width: 80px;
             height: 80px;
@@ -887,22 +889,22 @@ Kids app v4 · HTML
             font-size: 40px;
             margin-bottom: 15px;
         }
- 
+
         .caller-text {
             font-size: 24px;
             color: white;
             margin-bottom: 8px;
         }
- 
+
         .status-text {
             font-size: 16px;
             color: rgba(255, 255, 255, 0.6);
         }
- 
+
         .hidden {
             display: none !important;
         }
- 
+
         .contacts-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -911,7 +913,7 @@ Kids app v4 · HTML
             max-height: 400px;
             overflow-y: auto;
         }
- 
+
         .contact-card {
             background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
             border: 2px solid rgba(255,255,255,0.2);
@@ -924,12 +926,12 @@ Kids app v4 · HTML
             cursor: pointer;
             transition: all 0.2s;
         }
- 
+
         .contact-card:active {
             transform: scale(0.95);
             background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
         }
- 
+
         .contact-photo {
             width: 50px;
             height: 50px;
@@ -942,14 +944,14 @@ Kids app v4 · HTML
             justify-content: center;
             font-size: 24px;
         }
- 
+
         .contact-photo img {
             width: 100%;
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
         }
- 
+
         .contact-name {
             color: white;
             font-size: 11px;
@@ -965,7 +967,7 @@ Kids app v4 · HTML
         <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70">
         <span style="font-size: 20px;">🔊</span>
     </div>
- 
+
     <!-- SOUNDS TAB - ARCHIVED
     <div class="screen active" id="soundsScreen">
         <div class="sounds-grid">
@@ -1038,8 +1040,12 @@ Kids app v4 · HTML
         </div>
     </div>
     SOUNDS TAB - ARCHIVED -->
- 
+
     <div class="screen active" id="photosScreen">
+        <div style="position: fixed; top: 90px; right: 20px; z-index: 10;">
+            <button id="uploadPhotoBtn" style="background: linear-gradient(135deg, #34C759 0%, #30D158 100%); color: white; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3);" title="Upload photo">📤</button>
+            <input type="file" id="photoFileInput" accept="image/*,video/*" style="display: none;">
+        </div>
         <div class="photos-grid" id="photosGrid">
             <!-- Will be populated by JavaScript -->
         </div>
@@ -1054,7 +1060,7 @@ Kids app v4 · HTML
             <div class="photos-counter" id="photosCounter"></div>
         </div>
     </div>
- 
+
     <div class="screen" id="musicScreen">
         <div class="music-grid">
             <div class="music-item" data-song="music/gocubsgo" style="background-image: url('music/gocubsgo.jpg');">
@@ -1083,7 +1089,7 @@ Kids app v4 · HTML
             </video>
         </div>
     </div>
- 
+
     <div class="screen" id="lettersScreen">
         <div class="helper-text">👆 Tap to hear it!</div>
         <div class="score" id="scoreDisplay">⭐ <span id="score">0</span></div>
@@ -1094,12 +1100,12 @@ Kids app v4 · HTML
             <div class="options-grid" id="optionsGrid"></div>
         </div>
     </div>
- 
+
     <div class="screen" id="phoneScreen">
         <div class="phone-container">
             <div class="phone-screen">
                 <button class="settings-btn" id="settingsBtn">⚙️</button>
- 
+
                 <div class="pin-screen" id="pinScreen">
                     <div class="pin-title">Enter PIN</div>
                     <div class="pin-dots">
@@ -1124,7 +1130,7 @@ Kids app v4 · HTML
                     </div>
                     <div class="pin-error" id="pinError"></div>
                 </div>
- 
+
                 <div class="settings-panel" id="settingsPanel">
                     <div class="settings-header">
                         <div class="settings-title">Settings <span style="font-size: 12px; opacity: 0.5;">v4.0</span></div>
@@ -1147,12 +1153,17 @@ Kids app v4 · HTML
                         
                         All files should be in the same folder as this HTML file.
                     </div>
+                    <div class="settings-label">GitHub Token (for photo uploads)</div>
+                    <input type="password" class="settings-input" id="githubTokenInput" placeholder="Paste your GitHub token here">
+                    <button class="settings-save" id="saveTokenBtn">Save Token</button>
+                    <div id="tokenSaveMessage" style="color: #34C759; font-size: 14px; margin-top: 10px; min-height: 20px;"></div>
+                    
                     <div class="settings-label">Change PIN</div>
                     <input type="number" class="settings-input" id="newPinInput" placeholder="Enter 4-digit PIN" maxlength="4">
                     <button class="settings-save" id="savePinBtn">Save PIN</button>
                     <div id="pinSaveMessage" style="color: #34C759; font-size: 14px; margin-top: 10px; min-height: 20px;"></div>
                 </div>
- 
+
                 <div class="phone-display">
                     <div id="normalState">
                         <div class="phone-number" id="phoneNumber"></div>
@@ -1220,7 +1231,7 @@ Kids app v4 · HTML
                         </video>
                     </div>
                 </div>
- 
+
                 <div class="phone-keypad hidden" id="phoneKeypad">
                     <button class="phone-key" data-digit="1">1</button>
                     <button class="phone-key" data-digit="2">2</button>
@@ -1235,7 +1246,7 @@ Kids app v4 · HTML
                     <button class="phone-key" data-digit="0">0</button>
                     <button class="phone-key" data-digit="#">#</button>
                 </div>
- 
+
                 <div class="phone-actions hidden" id="callActions">
                     <button class="phone-action call-btn" id="callBtn">📞 Call</button>
                     <button class="phone-action facetime-btn" id="facetimeBtn">📹 FaceTime</button>
@@ -1247,7 +1258,7 @@ Kids app v4 · HTML
             </div>
         </div>
     </div>
- 
+
     <div class="nav-bar">
         <!-- <button class="nav-btn active" data-tab="sounds">🎪 Sounds</button> -->
         <button class="nav-btn active" data-tab="photos">📷 Photos</button>
@@ -1255,14 +1266,14 @@ Kids app v4 · HTML
         <button class="nav-btn" data-tab="letters">🔤 Letters</button>
         <button class="nav-btn" data-tab="phone">☎️ Phone</button>
     </div>
- 
+
     <script>
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
         let masterVolume = 0.7;
         let musicPlaying = false;
         let musicInterval = null;
         let ringInterval = null;
- 
+
         // Helper function to play a tone
         function playTone(frequency, duration, type = 'sine') {
             const osc = audioContext.createOscillator();
@@ -1276,11 +1287,11 @@ Kids app v4 · HTML
             osc.start(audioContext.currentTime);
             osc.stop(audioContext.currentTime + duration);
         }
- 
+
         document.addEventListener('click', () => {
             if (audioContext.state === 'suspended') audioContext.resume();
         }, { once: true });
- 
+
         // Music Player
         document.getElementById('playBtn').addEventListener('click', function() {
             if (musicPlaying) {
@@ -1312,11 +1323,11 @@ Kids app v4 · HTML
                 }, 500);
             }
         });
- 
+
         document.getElementById('volumeSlider').addEventListener('input', (e) => {
             masterVolume = e.target.value / 100;
         });
- 
+
         // Sounds
         const sounds = {
             dog: [392, 294, 392],
@@ -1326,7 +1337,7 @@ Kids app v4 · HTML
             star: [523, 659, 784, 1047],
             rainbow: [262, 330, 392, 523, 659, 784]
         };
- 
+
         document.querySelectorAll('.sound-card').forEach(card => {
             card.addEventListener('click', function() {
                 // Resume audio context if suspended
@@ -1359,7 +1370,7 @@ Kids app v4 · HTML
                 }, 1000);
             });
         });
- 
+
         // Media Gallery
         document.querySelectorAll('.music-item').forEach(item => {
             item.addEventListener('click', function() {
@@ -1380,7 +1391,7 @@ Kids app v4 · HTML
                 video.play();
             });
         });
- 
+
         // Music viewer close button
         document.getElementById('musicClose').addEventListener('click', () => {
             const viewer = document.getElementById('musicViewer');
@@ -1388,7 +1399,7 @@ Kids app v4 · HTML
             viewer.classList.remove('active');
             video.pause();
         });
- 
+
         // Close music viewer by tapping background
         document.getElementById('musicViewer').addEventListener('click', function(e) {
             if (e.target === this) {
@@ -1397,13 +1408,13 @@ Kids app v4 · HTML
                 video.pause();
             }
         });
- 
+
         // Letters Game
         const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
         const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
         let currentTarget = '';
         let score = 0;
- 
+
         function generateLetterGame() {
             const pool = Math.random() > 0.5 ? letters : numbers;
             currentTarget = pool[Math.floor(Math.random() * pool.length)];
@@ -1470,7 +1481,7 @@ Kids app v4 · HTML
                 grid.appendChild(btn);
             });
         }
- 
+
         document.getElementById('targetDisplay').addEventListener('click', () => {
             // Resume audio context if suspended
             if (audioContext.state === 'suspended') {
@@ -1492,7 +1503,7 @@ Kids app v4 · HTML
                 osc.stop(audioContext.currentTime + i * 0.15 + 0.4);
             });
         });
- 
+
         // Phone
         let phoneNumber = '';
         let phoneState = 'idle';
@@ -1504,7 +1515,7 @@ Kids app v4 · HTML
         // Contact database
         // Photos/Videos configuration - fetched from Netlify function
         let photoItems = [];
- 
+
         // Fetch photos from Netlify function
         async function fetchPhotos() {
             try {
@@ -1518,11 +1529,11 @@ Kids app v4 · HTML
                 initializePhotos();
             }
         }
- 
+
         let currentPhotoIndex = 0;
         let touchStartX = 0;
         let touchStartY = 0;
- 
+
         // Populate photos grid
         function initializePhotos() {
             const photosGrid = document.getElementById('photosGrid');
@@ -1543,14 +1554,14 @@ Kids app v4 · HTML
                 photosGrid.appendChild(photoItem);
             });
         }
- 
+
         function openPhoto(index) {
             if (photoItems.length === 0) return;
             currentPhotoIndex = index;
             displayPhoto();
             document.getElementById('photosViewer').classList.add('active');
         }
- 
+
         function displayPhoto() {
             const photo = photoItems[currentPhotoIndex];
             const img = document.getElementById('photosViewerImg');
@@ -1573,39 +1584,39 @@ Kids app v4 · HTML
             
             updatePhotoCounter();
         }
- 
+
         function updatePhotoCounter() {
             const counter = document.getElementById('photosCounter');
             counter.textContent = `${currentPhotoIndex + 1} / ${photoItems.length}`;
         }
- 
+
         function nextPhoto() {
             if (currentPhotoIndex < photoItems.length - 1) {
                 currentPhotoIndex++;
                 displayPhoto();
             }
         }
- 
+
         function previousPhoto() {
             if (currentPhotoIndex > 0) {
                 currentPhotoIndex--;
                 displayPhoto();
             }
         }
- 
+
         function closePhotoViewer() {
             const viewer = document.getElementById('photosViewer');
             const video = document.getElementById('photosViewerVideo');
             viewer.classList.remove('active');
             video.pause();
         }
- 
+
         // Touch/Swipe handlers for photos
         document.getElementById('photosViewerContent').addEventListener('touchstart', (e) => {
             touchStartX = e.touches[0].clientX;
             touchStartY = e.touches[0].clientY;
         }, false);
- 
+
         document.getElementById('photosViewerContent').addEventListener('touchend', (e) => {
             const touchEndX = e.changedTouches[0].clientX;
             const touchEndY = e.changedTouches[0].clientY;
@@ -1628,17 +1639,17 @@ Kids app v4 · HTML
                 }
             }
         }, false);
- 
+
         // Close button
         document.getElementById('photosClose').addEventListener('click', closePhotoViewer);
- 
+
         // Close by tapping background
         document.getElementById('photosViewer').addEventListener('click', function(e) {
             if (e.target === this) {
                 closePhotoViewer();
             }
         });
- 
+
         const contacts = {
             'mommy': { name: 'Mommy', video: 'contacts/mommy', emoji: '👩' },
             'daddy': { name: 'Daddy', video: 'contacts/daddy', emoji: '👨' },
@@ -1648,7 +1659,7 @@ Kids app v4 · HTML
             'uncle-chris': { name: 'Uncle Chris', video: 'contacts/uncle-chris', emoji: '👨‍🦲' },
             'francesca': { name: 'Francesca', video: 'contacts/francesca', emoji: '👧' }
         };
- 
+
         document.querySelectorAll('[data-digit]').forEach(btn => {
             btn.addEventListener('click', function() {
                 if (phoneState !== 'idle' || phoneNumber.length >= 10) return;
@@ -1690,7 +1701,7 @@ Kids app v4 · HTML
                 document.getElementById('phoneNumber').textContent = formatted;
             });
         });
- 
+
         document.getElementById('deleteBtn').addEventListener('click', () => {
             phoneNumber = phoneNumber.slice(0, -1);
             let formatted = phoneNumber;
@@ -1703,7 +1714,7 @@ Kids app v4 · HTML
             }
             document.getElementById('phoneNumber').textContent = formatted;
         });
- 
+
         document.getElementById('callBtn').addEventListener('click', () => {
             if (!phoneNumber) return;
             
@@ -1747,7 +1758,7 @@ Kids app v4 · HTML
                 }
             }, 2000);
         });
- 
+
         // Contact Cards - Direct Tap to Call
         document.querySelectorAll('[data-contact]').forEach(card => {
             card.addEventListener('click', function() {
@@ -1809,7 +1820,7 @@ Kids app v4 · HTML
                 }, 2000);
             });
         });
- 
+
         document.getElementById('facetimeBtn').addEventListener('click', () => {
             // Stop music during FaceTime
             if (musicPlaying) {
@@ -1855,7 +1866,7 @@ Kids app v4 · HTML
                 }
             }, 2000);
         });
- 
+
         document.getElementById('endBtn').addEventListener('click', () => {
             phoneState = 'idle';
             phoneNumber = '';
@@ -1880,14 +1891,14 @@ Kids app v4 · HTML
             document.querySelector('.phone-display').classList.remove('calling-mode');
             document.getElementById('phoneNumber').textContent = '';
         });
- 
+
         // PIN System
         document.getElementById('settingsBtn').addEventListener('click', () => {
             document.getElementById('pinScreen').classList.add('active');
             pinEntry = '';
             document.querySelectorAll('.pin-dot').forEach(d => d.classList.remove('filled'));
         });
- 
+
         document.querySelectorAll('[data-pin]').forEach(btn => {
             btn.addEventListener('click', function() {
                 if (pinEntry.length < 4) {
@@ -1910,7 +1921,7 @@ Kids app v4 · HTML
                 }
             });
         });
- 
+
         document.getElementById('pinDelete').addEventListener('click', () => {
             pinEntry = pinEntry.slice(0, -1);
             document.querySelectorAll('.pin-dot').forEach((d, i) => {
@@ -1919,18 +1930,18 @@ Kids app v4 · HTML
             });
             document.getElementById('pinError').textContent = '';
         });
- 
+
         document.getElementById('pinCancel').addEventListener('click', () => {
             document.getElementById('pinScreen').classList.remove('active');
             pinEntry = '';
             document.querySelectorAll('.pin-dot').forEach(d => d.classList.remove('filled'));
         });
- 
+
         document.getElementById('settingsClose').addEventListener('click', () => {
             document.getElementById('settingsPanel').classList.remove('active');
         });
- 
- 
+
+
         document.getElementById('savePinBtn').addEventListener('click', () => {
             const newPin = document.getElementById('newPinInput').value;
             const messageEl = document.getElementById('pinSaveMessage');
@@ -1949,7 +1960,82 @@ Kids app v4 · HTML
                 messageEl.textContent = '';
             }, 3000);
         });
- 
+
+        // GitHub Token & Photo Upload
+        let savedGithubToken = localStorage.getItem('github_token') || '';
+
+        document.getElementById('saveTokenBtn').addEventListener('click', () => {
+            const token = document.getElementById('githubTokenInput').value;
+            const messageEl = document.getElementById('tokenSaveMessage');
+            
+            if (!token || token.length < 20) {
+                messageEl.textContent = '❌ Invalid token';
+                messageEl.style.color = '#FF3B30';
+                return;
+            }
+            savedGithubToken = token;
+            localStorage.setItem('github_token', token);
+            document.getElementById('githubTokenInput').value = '';
+            messageEl.textContent = '✅ Token saved!';
+            messageEl.style.color = '#34C759';
+            setTimeout(() => {
+                messageEl.textContent = '';
+            }, 3000);
+        });
+
+        // Load saved token (masked)
+        if (savedGithubToken) {
+            document.getElementById('githubTokenInput').placeholder = '✅ Token already saved';
+        }
+
+        // Photo Upload
+        document.getElementById('uploadPhotoBtn').addEventListener('click', () => {
+            if (!savedGithubToken) {
+                alert('Please save your GitHub token in settings first!');
+                document.getElementById('settingsBtn').click();
+                return;
+            }
+            document.getElementById('photoFileInput').click();
+        });
+
+        document.getElementById('photoFileInput').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const button = document.getElementById('uploadPhotoBtn');
+            button.textContent = '⏳';
+            button.disabled = true;
+
+            try {
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('token', savedGithubToken);
+                formData.append('filename', file.name);
+
+                const response = await fetch('/.netlify/functions/uploadPhoto', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('✅ Photo uploaded! Refreshing...');
+                    setTimeout(() => {
+                        fetchPhotos();
+                    }, 1000);
+                } else {
+                    alert('❌ Upload failed: ' + (data.error || 'Unknown error'));
+                }
+            } catch (error) {
+                alert('❌ Upload error: ' + error.message);
+            } finally {
+                button.textContent = '📤';
+                button.disabled = false;
+                document.getElementById('photoFileInput').value = '';
+            }
+        });
+
         // Tab Switching
         document.querySelectorAll('[data-tab]').forEach(btn => {
             btn.addEventListener('click', function() {
@@ -1995,7 +2081,7 @@ Kids app v4 · HTML
                     musicViewer.classList.remove('active');
                     musicVideo.pause();
                 }
- 
+
                 // Close photos viewer if open
                 const photosViewer = document.getElementById('photosViewer');
                 const photosVideo = document.getElementById('photosViewerVideo');
@@ -2017,7 +2103,7 @@ Kids app v4 · HTML
                 } else {
                     musicPlayer.classList.remove('visible');
                 }
- 
+
                 // Initialize photos when entering photos tab
                 if (tab === 'photos') {
                     fetchPhotos();
@@ -2031,7 +2117,7 @@ Kids app v4 · HTML
                 }
             });
         });
- 
+
         // Initialize - fetch photos, initialize game
         fetchPhotos();
         generateLetterGame();
