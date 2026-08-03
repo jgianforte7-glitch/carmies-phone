@@ -1992,17 +1992,10 @@
             document.getElementById('githubTokenInput').placeholder = '✅ Token already saved';
         }
 
-        // Photo Upload - PIN Protected
+        // Photo Upload - Only accessible after PIN entry to settings
         document.getElementById('uploadPhotoBtn').addEventListener('click', () => {
             if (!savedGithubToken) {
                 alert('Please save your GitHub token in settings first!');
-                return;
-            }
-            
-            // Prompt for PIN
-            const enteredPin = prompt('Enter PIN to upload photos:');
-            if (enteredPin !== savedPin) {
-                alert('❌ Incorrect PIN');
                 return;
             }
             
@@ -2026,19 +2019,26 @@
                 messageEl.style.color = '#667eea';
 
                 try {
-                    const formData = new FormData();
-                    formData.append('file', file);
-                    formData.append('token', savedGithubToken);
-                    formData.append('filename', file.name);
+                    // Read file as base64
+                    const base64 = await new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onload = () => resolve(reader.result.split(',')[1]);
+                        reader.onerror = reject;
+                        reader.readAsDataURL(file);
+                    });
 
                     const response = await fetch('/.netlify/functions/uploadPhoto', {
                         method: 'POST',
-                        body: formData
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            filename: file.name,
+                            content: base64,
+                            token: savedGithubToken
+                        })
                     });
 
                     const data = await response.json();
-
-                    if (response.ok) {
+                    if (response.ok && data.success) {
                         successCount++;
                     } else {
                         failCount++;
@@ -2049,7 +2049,7 @@
                 
                 // Small delay between uploads
                 if (i < files.length - 1) {
-                    await new Promise(resolve => setTimeout(resolve, 500));
+                    await new Promise(resolve => setTimeout(resolve, 300));
                 }
             }
 
