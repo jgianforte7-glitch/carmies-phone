@@ -1153,8 +1153,8 @@
                         All files should be in the same folder as this HTML file.
                     </div>
                     <div class="settings-label">Upload Photo from Camera Roll</div>
-                    <button class="settings-save" id="uploadPhotoBtn" style="background: linear-gradient(135deg, #34C759 0%, #30D158 100%); margin-bottom: 10px;">📤 Choose Photo</button>
-                    <input type="file" id="photoFileInput" accept="image/*,video/*" style="display: none;">
+                    <button class="settings-save" id="uploadPhotoBtn" style="background: linear-gradient(135deg, #34C759 0%, #30D158 100%); margin-bottom: 10px;">📤 Choose Photos</button>
+                    <input type="file" id="photoFileInput" accept="image/*,video/*" multiple style="display: none;">
                     <div id="uploadMessage" style="color: #34C759; font-size: 14px; margin-top: 10px; min-height: 20px;"></div>
                     
                     <div class="settings-label">GitHub Token (for photo uploads)</div>
@@ -2010,46 +2010,68 @@
         });
 
         document.getElementById('photoFileInput').addEventListener('change', async (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
+            const files = e.target.files;
+            if (files.length === 0) return;
 
             const button = document.getElementById('uploadPhotoBtn');
             const messageEl = document.getElementById('uploadMessage');
-            button.textContent = '⏳ Uploading...';
             button.disabled = true;
 
-            try {
-                const formData = new FormData();
-                formData.append('file', file);
-                formData.append('token', savedGithubToken);
-                formData.append('filename', file.name);
+            let successCount = 0;
+            let failCount = 0;
 
-                const response = await fetch('/.netlify/functions/uploadPhoto', {
-                    method: 'POST',
-                    body: formData
-                });
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                messageEl.textContent = `Uploading ${i + 1}/${files.length}: ${file.name}...`;
+                messageEl.style.color = '#667eea';
 
-                const data = await response.json();
+                try {
+                    const formData = new FormData();
+                    formData.append('file', file);
+                    formData.append('token', savedGithubToken);
+                    formData.append('filename', file.name);
 
-                if (response.ok) {
-                    messageEl.textContent = '✅ Photo uploaded! Refreshing...';
-                    messageEl.style.color = '#34C759';
-                    setTimeout(() => {
-                        fetchPhotos();
-                        messageEl.textContent = '';
-                    }, 1000);
-                } else {
-                    messageEl.textContent = '❌ Upload failed: ' + (data.error || 'Unknown error');
-                    messageEl.style.color = '#FF3B30';
+                    const response = await fetch('/.netlify/functions/uploadPhoto', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        successCount++;
+                    } else {
+                        failCount++;
+                    }
+                } catch (error) {
+                    failCount++;
                 }
-            } catch (error) {
-                messageEl.textContent = '❌ Upload error: ' + error.message;
-                messageEl.style.color = '#FF3B30';
-            } finally {
-                button.textContent = '📤 Choose Photo';
-                button.disabled = false;
-                document.getElementById('photoFileInput').value = '';
+                
+                // Small delay between uploads
+                if (i < files.length - 1) {
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                }
             }
+
+            // Final message
+            if (failCount === 0) {
+                messageEl.textContent = `✅ ${successCount} photo(s) uploaded! Refreshing...`;
+                messageEl.style.color = '#34C759';
+                setTimeout(() => {
+                    fetchPhotos();
+                    messageEl.textContent = '';
+                }, 1500);
+            } else {
+                messageEl.textContent = `✅ ${successCount} uploaded, ❌ ${failCount} failed`;
+                messageEl.style.color = '#FF9500';
+                setTimeout(() => {
+                    fetchPhotos();
+                }, 1500);
+            }
+
+            button.textContent = '📤 Choose Photos';
+            button.disabled = false;
+            document.getElementById('photoFileInput').value = '';
         });
 
         // Tab Switching
