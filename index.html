@@ -771,6 +771,8 @@
             flex-direction: column;
             padding: 60px 20px 20px;
             border-radius: 40px;
+            overflow-y: auto;
+            max-height: 100%;
         }
 
         .settings-panel.active {
@@ -787,6 +789,7 @@
             color: white;
             font-size: 24px;
             font-weight: 600;
+            display: none;
         }
 
         .settings-close {
@@ -1042,10 +1045,6 @@
     SOUNDS TAB - ARCHIVED -->
 
     <div class="screen active" id="photosScreen">
-        <div style="position: fixed; top: 90px; right: 20px; z-index: 10;">
-            <button id="uploadPhotoBtn" style="background: linear-gradient(135deg, #34C759 0%, #30D158 100%); color: white; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3);" title="Upload photo">📤</button>
-            <input type="file" id="photoFileInput" accept="image/*,video/*" style="display: none;">
-        </div>
         <div class="photos-grid" id="photosGrid">
             <!-- Will be populated by JavaScript -->
         </div>
@@ -1153,6 +1152,11 @@
                         
                         All files should be in the same folder as this HTML file.
                     </div>
+                    <div class="settings-label">Upload Photo from Camera Roll</div>
+                    <button class="settings-save" id="uploadPhotoBtn" style="background: linear-gradient(135deg, #34C759 0%, #30D158 100%); margin-bottom: 10px;">📤 Choose Photo</button>
+                    <input type="file" id="photoFileInput" accept="image/*,video/*" style="display: none;">
+                    <div id="uploadMessage" style="color: #34C759; font-size: 14px; margin-top: 10px; min-height: 20px;"></div>
+                    
                     <div class="settings-label">GitHub Token (for photo uploads)</div>
                     <input type="password" class="settings-input" id="githubTokenInput" placeholder="Paste your GitHub token here">
                     <button class="settings-save" id="saveTokenBtn">Save Token</button>
@@ -1173,43 +1177,43 @@
                     <div class="contacts-grid" id="contactsGrid">
                         <div class="contact-card" data-contact="mommy">
                             <div class="contact-photo">
-                                <img src="mommy.jpg" onerror="this.style.display='none'; this.parentElement.textContent='👩'">
+                                <img src="contacts/mommy.jpg" onerror="this.style.display='none'; this.parentElement.textContent='👩'">
                             </div>
                             <div class="contact-name">Mommy</div>
                         </div>
                         <div class="contact-card" data-contact="daddy">
                             <div class="contact-photo">
-                                <img src="daddy.jpg" onerror="this.style.display='none'; this.parentElement.textContent='👨'">
+                                <img src="contacts/daddy.jpg" onerror="this.style.display='none'; this.parentElement.textContent='👨'">
                             </div>
                             <div class="contact-name">Daddy</div>
                         </div>
                         <div class="contact-card" data-contact="grandma">
                             <div class="contact-photo">
-                                <img src="grandma.jpg" onerror="this.style.display='none'; this.parentElement.textContent='👵'">
+                                <img src="contacts/grandma.jpg" onerror="this.style.display='none'; this.parentElement.textContent='👵'">
                             </div>
                             <div class="contact-name">Grandma</div>
                         </div>
                         <div class="contact-card" data-contact="auntie-theresa">
                             <div class="contact-photo">
-                                <img src="auntie-theresa.jpg" onerror="this.style.display='none'; this.parentElement.textContent='👩‍🦰'">
+                                <img src="contacts/auntie-theresa.jpg" onerror="this.style.display='none'; this.parentElement.textContent='👩‍🦰'">
                             </div>
                             <div class="contact-name">Auntie Theresa</div>
                         </div>
                         <div class="contact-card" data-contact="uncle-kyle">
                             <div class="contact-photo">
-                                <img src="uncle-kyle.jpg" onerror="this.style.display='none'; this.parentElement.textContent='👨‍🦱'">
+                                <img src="contacts/uncle-kyle.jpg" onerror="this.style.display='none'; this.parentElement.textContent='👨‍🦱'">
                             </div>
                             <div class="contact-name">Uncle Kyle</div>
                         </div>
                         <div class="contact-card" data-contact="uncle-chris">
                             <div class="contact-photo">
-                                <img src="uncle-chris.jpg" onerror="this.style.display='none'; this.parentElement.textContent='👨‍🦲'">
+                                <img src="contacts/uncle-chris.jpg" onerror="this.style.display='none'; this.parentElement.textContent='👨‍🦲'">
                             </div>
                             <div class="contact-name">Uncle Chris</div>
                         </div>
                         <div class="contact-card" data-contact="francesca">
                             <div class="contact-photo">
-                                <img src="francesca.jpg" onerror="this.style.display='none'; this.parentElement.textContent='👧'">
+                                <img src="contacts/francesca.jpg" onerror="this.style.display='none'; this.parentElement.textContent='👧'">
                             </div>
                             <div class="contact-name">Francesca</div>
                         </div>
@@ -1988,13 +1992,20 @@
             document.getElementById('githubTokenInput').placeholder = '✅ Token already saved';
         }
 
-        // Photo Upload
+        // Photo Upload - PIN Protected
         document.getElementById('uploadPhotoBtn').addEventListener('click', () => {
             if (!savedGithubToken) {
                 alert('Please save your GitHub token in settings first!');
-                document.getElementById('settingsBtn').click();
                 return;
             }
+            
+            // Prompt for PIN
+            const enteredPin = prompt('Enter PIN to upload photos:');
+            if (enteredPin !== savedPin) {
+                alert('❌ Incorrect PIN');
+                return;
+            }
+            
             document.getElementById('photoFileInput').click();
         });
 
@@ -2003,7 +2014,8 @@
             if (!file) return;
 
             const button = document.getElementById('uploadPhotoBtn');
-            button.textContent = '⏳';
+            const messageEl = document.getElementById('uploadMessage');
+            button.textContent = '⏳ Uploading...';
             button.disabled = true;
 
             try {
@@ -2020,17 +2032,21 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    alert('✅ Photo uploaded! Refreshing...');
+                    messageEl.textContent = '✅ Photo uploaded! Refreshing...';
+                    messageEl.style.color = '#34C759';
                     setTimeout(() => {
                         fetchPhotos();
+                        messageEl.textContent = '';
                     }, 1000);
                 } else {
-                    alert('❌ Upload failed: ' + (data.error || 'Unknown error'));
+                    messageEl.textContent = '❌ Upload failed: ' + (data.error || 'Unknown error');
+                    messageEl.style.color = '#FF3B30';
                 }
             } catch (error) {
-                alert('❌ Upload error: ' + error.message);
+                messageEl.textContent = '❌ Upload error: ' + error.message;
+                messageEl.style.color = '#FF3B30';
             } finally {
-                button.textContent = '📤';
+                button.textContent = '📤 Choose Photo';
                 button.disabled = false;
                 document.getElementById('photoFileInput').value = '';
             }
