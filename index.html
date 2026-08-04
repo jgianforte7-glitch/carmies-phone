@@ -2038,13 +2038,17 @@
                     });
 
                     const data = await response.json();
+                    console.log('Upload response:', response.status, data);
+                    
                     if (response.ok && data.success) {
                         successCount++;
                     } else {
                         failCount++;
+                        console.error('Upload failed:', data);
                     }
                 } catch (error) {
                     failCount++;
+                    console.error('Upload error:', error);
                 }
                 
                 // Small delay between uploads
