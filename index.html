@@ -222,10 +222,11 @@
         .photos-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            padding: 90px 15px 90px;
-            max-height: calc(100% - 100px);
-            overflow-y: auto;
+            gap: 6px;
+            padding: 90px 10px 90px;
+            height: calc(100vh - 180px);
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
         }
 
         .music-item {
@@ -1546,7 +1547,10 @@
             photoItems.forEach((photo, index) => {
                 const photoItem = document.createElement('div');
                 photoItem.className = 'photo-item';
+                // Use lazy loading for thumbnails
                 photoItem.style.backgroundImage = `url('photos/${photo.file}')`;
+                photoItem.style.backgroundSize = 'cover';
+                photoItem.style.backgroundPosition = 'center';
                 photoItem.setAttribute('data-index', index);
                 
                 const titleDiv = document.createElement('div');
@@ -1572,18 +1576,21 @@
             const video = document.getElementById('photosViewerVideo');
             const videoSource = document.getElementById('photosViewerSource');
             
+            // Pause any playing video first
+            video.pause();
+            
             if (photo.type === 'image') {
                 img.src = `photos/${photo.file}`;
                 img.style.display = 'block';
                 video.style.display = 'none';
             } else {
-                // Video - try to load with proper path
+                // Video - load ONLY when displayed (no autoplay)
                 const filename = photo.file;
                 videoSource.src = `photos/${filename}`;
                 video.load();
                 video.style.display = 'block';
                 img.style.display = 'none';
-                video.play();
+                // Don't autoplay - let user tap to play
             }
             
             updatePhotoCounter();
