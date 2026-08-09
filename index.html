@@ -75,7 +75,8 @@
         }
 
         #photosScreen {
-            overflow: visible;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
         .screen.active {
@@ -230,10 +231,6 @@
             gap: 10px;
             padding: 90px 15px 120px 15px;
             width: 100%;
-            min-height: 100%;
-            overflow-y: scroll;
-            overflow-x: hidden;
-            box-sizing: border-box;
         }
 
         .music-item {
