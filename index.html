@@ -223,10 +223,12 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
-            padding: 90px 15px 90px;
+            padding: 90px 15px 120px 15px;
+            width: 100%;
             height: 100%;
-            overflow-y: auto;
+            overflow-y: scroll;
             overflow-x: hidden;
+            box-sizing: border-box;
         }
 
         .music-item {
@@ -262,20 +264,18 @@
         }
 
         .photo-item {
-            aspect-ratio: 1;
+            aspect-ratio: 1 / 1;
             border-radius: 10px;
             overflow: hidden;
             cursor: pointer;
-            transition: transform 0.2s;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
             background-size: cover;
             background-position: center;
             background-color: #667eea;
             border: 2px solid rgba(255,255,255,0.3);
             position: relative;
+            min-height: 0;
+            min-width: 0;
         }
 
         .photo-item::before {
@@ -1547,6 +1547,7 @@
             photoItems.forEach((photo, index) => {
                 const photoItem = document.createElement('div');
                 photoItem.className = 'photo-item';
+                photoItem.setAttribute('data-index', index);
                 
                 // Only set background for images, not videos
                 if (photo.type === 'image') {
@@ -1554,19 +1555,17 @@
                 } else {
                     // For videos, use a solid color background with play icon
                     photoItem.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-                    photoItem.style.display = 'flex';
-                    photoItem.style.alignItems = 'center';
-                    photoItem.style.justifyContent = 'center';
                     const playIcon = document.createElement('div');
                     playIcon.textContent = '▶️';
-                    playIcon.style.fontSize = '32px';
+                    playIcon.style.fontSize = '40px';
+                    playIcon.style.position = 'absolute';
+                    playIcon.style.top = '50%';
+                    playIcon.style.left = '50%';
+                    playIcon.style.transform = 'translate(-50%, -50%)';
                     playIcon.style.zIndex = '10';
+                    playIcon.style.pointerEvents = 'none';
                     photoItem.appendChild(playIcon);
                 }
-                
-                photoItem.style.backgroundSize = 'cover';
-                photoItem.style.backgroundPosition = 'center';
-                photoItem.setAttribute('data-index', index);
                 
                 const titleDiv = document.createElement('div');
                 titleDiv.className = 'photo-item-title';
