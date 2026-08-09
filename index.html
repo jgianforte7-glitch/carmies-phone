@@ -222,11 +222,11 @@
         .photos-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-            padding: 90px 10px 90px;
-            height: calc(100vh - 180px);
-            overflow-y: scroll;
-            -webkit-overflow-scrolling: touch;
+            gap: 10px;
+            padding: 90px 15px 90px;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
         .music-item {
@@ -1547,8 +1547,23 @@
             photoItems.forEach((photo, index) => {
                 const photoItem = document.createElement('div');
                 photoItem.className = 'photo-item';
-                // Use lazy loading for thumbnails
-                photoItem.style.backgroundImage = `url('photos/${photo.file}')`;
+                
+                // Only set background for images, not videos
+                if (photo.type === 'image') {
+                    photoItem.style.backgroundImage = `url('photos/${photo.file}')`;
+                } else {
+                    // For videos, use a solid color background with play icon
+                    photoItem.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                    photoItem.style.display = 'flex';
+                    photoItem.style.alignItems = 'center';
+                    photoItem.style.justifyContent = 'center';
+                    const playIcon = document.createElement('div');
+                    playIcon.textContent = '▶️';
+                    playIcon.style.fontSize = '32px';
+                    playIcon.style.zIndex = '10';
+                    photoItem.appendChild(playIcon);
+                }
+                
                 photoItem.style.backgroundSize = 'cover';
                 photoItem.style.backgroundPosition = 'center';
                 photoItem.setAttribute('data-index', index);
